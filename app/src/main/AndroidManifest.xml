@@ -28,6 +28,7 @@
 
         <activity
             android:name="com.parse.ui.ParseLoginActivity"
+            android:theme="@style/LoginTheme"
             android:label="@string/app_name"
             android:launchMode="singleTop">
             <meta-data

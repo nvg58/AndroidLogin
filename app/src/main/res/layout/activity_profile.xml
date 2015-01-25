@@ -6,47 +6,77 @@
     android:paddingRight="@dimen/com_parse_ui_horizontal_margin"
     android:paddingBottom="@dimen/com_parse_ui_vertical_margin"
     android:gravity="center"
-    android:orientation="vertical">
-
-    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/app_logo"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:src="@drawable/rocket"
-        android:contentDescription="@string/com_parse_ui_logo_content_description" />
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="vertical"
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/profile_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/ParseLoginUI.TextView"
-            android:text="@string/profile_title_logged_in" />
+            android:text="@string/profile_title_logged_in"
+            android:autoText="false"
+            android:textColor="#111" />
 
         <TextView
             android:id="@+id/profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#333"
             style="@style/ParseLoginUI.TextView" />
 
         <TextView
             android:id="@+id/profile_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#333"
             style="@style/ParseLoginUI.TextView" />
 
         <Button
             android:id="@+id/logout_button"
             style="@style/ParseLoginUI.Button"
             android:layout_marginTop="@dimen/com_parse_ui_large_vertical_spacing"
-            android:text="@string/profile_logout_button_label" />
+            android:text="@string/profile_logout_button_label"
+            android:background="#09c"
+            android:layout_width="match_parent"
+            android:paddingBottom="10dp" />
+
+        <TextView
+            style="@style/Widget.DescriptionBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/intro_message"
+            android:background="#eee"
+            android:id="@+id/intro_message"
+            android:textColor="#333"
+            android:fontFamily="Roboto"
+            android:password="false" />
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.24"
+            android:paddingLeft="@dimen/page_margin"
+            android:paddingRight="@dimen/page_margin"
+            android:scrollbarStyle="outsideOverlay"
+            android:choiceMode="multipleChoice" />
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_marginTop="@dimen/com_parse_ui_large_vertical_spacing"
+            android:text="@string/submit_label"
+            android:layout_gravity="right"
+            android:background="#09c"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ParseLoginUI.Button" />
     </LinearLayout>
 </LinearLayout>
