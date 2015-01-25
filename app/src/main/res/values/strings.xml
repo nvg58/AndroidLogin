@@ -5,4 +5,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string name="parse_app_id">yKQf0PLRIsPPdsWDCp2GXok4uJMfCA9PUUysvvvD</string>
+    <string name="parse_client_key">sXIgd3gstXXNtU34DSLkpCIS8E8fwYcRQPdEOF2H</string>
+    <string name="facebook_app_id">332698230249714</string>
+
+    <string name="profile_title_logged_in">Your are logged in as</string>
+    <string name="profile_logout_button_label">Log out</string>
+
 </resources>
