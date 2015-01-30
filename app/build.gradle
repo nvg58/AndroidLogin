@@ -22,8 +22,13 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
+
+    // Using ParseLoginUI
     compile project(':ParseLoginUI')
 
     // Using Facebook Login
     compile 'com.facebook.android:facebook-android-sdk:3.21.1'
+
+    // Using MaterialNavigationDrawer
+    compile 'it.neokree:MaterialNavigationDrawer:1.3'
 }

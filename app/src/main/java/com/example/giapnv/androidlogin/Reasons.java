@@ -22,6 +22,9 @@ package com.example.giapnv.androidlogin;
 public class Reasons {
     public static final String[] REASONS = {
             "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam Abondance Ackawi",
+            "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam Abondance Ackawi",
+            "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam Abondance Ackawi",
+            "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam Abondance Ackawi",
             "Acorn Adelost", "Affidelice au Chablis", "Other"
     };
 }

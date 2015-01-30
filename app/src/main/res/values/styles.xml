@@ -2,9 +2,14 @@
 
     <!-- Activity themes -->
 
-    <style name="AppTheme" parent="android:Theme.Material.Light.NoActionBar">
-        <!--<item name="android:background">#09c</item>-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!--<item name="actionBarStyle">@style/MyActionBarStyle</item>-->
 
+        <!-- Set AppCompat’s color theming attrs -->
+        <item name="colorPrimary">@color/my_color</item>
+        <item name="colorPrimaryDark">@color/my_darker_color</item>
+        <!--<item name="colorAccent">@color/my_accent</item>-->
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="Widget.DescriptionBar">
@@ -31,9 +36,21 @@
         <item name="android:shadowRadius">2</item>
     </style>
 
-    <style name="LoginTheme" parent="android:Theme.Material">
-        <!--<item name="android:background">#ff194f56</item>-->
-        <item name="android:windowBackground">@drawable/background</item>
+    <style name="LoginTheme" parent="Theme.AppCompat">
+        <item name="colorPrimaryDark">#424242</item>
+        <item name="android:navigationBarColor">#424242</item>
+        <!--<item name="android:background">#F44336</item>-->
+
     </style>
 
+    <style name="MyNavigationDrawerTheme" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar.TranslucentKitKatStatusBar">
+        <item name="rippleBackport">true</item>
+        <item name="colorPrimary">@color/my_color</item>
+        <item name="colorPrimaryDark">@color/my_darker_color</item>
+        <item name="colorAccent">@android:color/white</item>
+    </style>
+
+    <color name="my_color">#424242</color>
+    <color name="my_darker_color">#616161</color>
+    <!--<color name="my_accent">#29B6F6</color>-->
 </resources>

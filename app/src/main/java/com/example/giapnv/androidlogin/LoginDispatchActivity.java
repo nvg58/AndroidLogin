@@ -7,7 +7,7 @@ public class LoginDispatchActivity extends ParseLoginDispatchActivity {
 
     @Override
     protected Class<?> getTargetClass() {
-        return ProfileActivity.class;
+        return MyNavigationDrawer.class;
     }
 
     @Override
