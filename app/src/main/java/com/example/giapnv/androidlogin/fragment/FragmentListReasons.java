@@ -9,9 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.giapnv.androidlogin.R;
@@ -19,47 +20,43 @@ import com.example.giapnv.androidlogin.data.Reasons;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
-import java.util.ArrayList;
-
 public class FragmentListReasons extends ListFragment {
 
-    ArrayList<String> reasonList = new ArrayList<>();
-    ArrayAdapter<String> mAdapter;
+    private String mReason = null;
+    private MyAdapter mAdapter;
+    private int mSelectedItem;    
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        mAdapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_selectable_list_item, Reasons.REASONS);
+
+        mAdapter = new MyAdapter();
         setListAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+
+        ListView lv = getListView();
+        lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        lv.setItemChecked(0, true);
+
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Log.i("FragmentListReasons", "Item clicked: " + id + Reasons.REASONS[(int) id]);
+        Log.i("FragmentListReasons", "Item clicked: " + position);
 
-        CheckedTextView check = (CheckedTextView) v;
-        check.toggle();
+        mSelectedItem = position;
+        mAdapter.notifyDataSetChanged();
 
-        if (check.isChecked()) {
-            check.setTextColor(Color.parseColor("#9c27b0"));
-            reasonList.add(Reasons.REASONS[(int) id]);
-        } else {
-            check.setTextColor(Color.parseColor("#111111"));
-            reasonList.remove(Reasons.REASONS[(int) id]);
-        }
+        mReason = l.getAdapter().getItem(mSelectedItem).toString();
     }
 
-    //
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_layout, container, false);
         view.findViewById(R.id.footer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("reasonList", reasonList.toString());
-                if (reasonList.size() > 0) {
+                if (mReason != null) {
                     new SubmitTask().execute();
                 } else {
                     Toast.makeText(getActivity().getApplicationContext(), "Please choose a reason!", Toast.LENGTH_SHORT).show();
@@ -68,18 +65,7 @@ public class FragmentListReasons extends ListFragment {
         });
 
         return view;
-
-//        return super.onCreateView(inflater, container, savedInstanceState);
     }
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//
-//        this.getListView().setAdapter(new ArrayAdapter<>(this.getActivity(),
-//                android.R.layout.simple_selectable_list_item,
-//                Reasons.REASONS));
-//    }
 
     private class SubmitTask extends AsyncTask<Void, Void, Void> {
         private ProgressDialog dialog = new ProgressDialog(getActivity());
@@ -96,11 +82,9 @@ public class FragmentListReasons extends ListFragment {
 
             ParseObject post = new ParseObject("AbsentReports");
 
-            String res = reasonList.toString();
+            Log.d("%s", mReason);
 
-            Log.d("%s", res);
-
-            post.put("reasons", res);
+            post.put("reasons", mReason);
             post.put("user", user);
             post.put("userName", user.get("name"));
             post.saveInBackground();
@@ -118,6 +102,44 @@ public class FragmentListReasons extends ListFragment {
                 dialog.dismiss();
             }
             Toast.makeText(getActivity().getApplicationContext(), "Submit successfully!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * A simple array adapter that creates a list of reasons.
+     */
+    private class MyAdapter extends BaseAdapter {
+        @Override
+        public int getCount() {
+            return Reasons.REASONS.length;
+        }
+
+        @Override
+        public String getItem(int position) {
+            return Reasons.REASONS[position];
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return Reasons.REASONS[position].hashCode();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup container) {
+            if (convertView == null) {
+                convertView = getActivity().getLayoutInflater().inflate(android.R.layout.simple_list_item_checked, container, false);
+            }
+
+            TextView tv = ((TextView) convertView.findViewById(android.R.id.text1));
+            tv.setText(getItem(position));
+
+            if (position == mSelectedItem) {
+                tv.setTextColor(Color.parseColor("#9c27b0"));
+            } else {
+                tv.setTextColor(Color.parseColor("#111111"));
+            }
+
+            return convertView;
         }
     }
 }

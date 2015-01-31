@@ -4,9 +4,19 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.giapnv.androidlogin.fragment.FragmentListReasons;
+import com.facebook.HttpMethod;
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.model.GraphObject;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
@@ -16,20 +26,47 @@ import it.neokree.materialnavigationdrawer.elements.listeners.MaterialSectionLis
 
 public class MyNavigationDrawer extends MaterialNavigationDrawer implements MaterialAccountListener {
     MaterialAccount account;
+    String userName;
+    String userMail;
 
     @Override
     public void init(Bundle savedInstanceState) {
         ParseUser user = ParseUser.getCurrentUser();
 
-//        if (ParseFacebookUtils.isLinked(user)) {
-        String userName = user.get("name").toString();
-        String userMail = user.getEmail();
-//            String userAvatar = ParseFacebookUtils.isLinked(user) ?
+        userName = user.get("name").toString();
+        userMail = user.getEmail();
 
-        // add accounts
         account = new MaterialAccount(this.getResources(), userName, userMail, R.drawable.photo, R.drawable.bamboo);
         this.addAccount(account);
-//        }
+
+        Bundle params = new Bundle();
+        params.putString("fields", "cover");
+        new Request(ParseFacebookUtils.getSession(),
+                "me",
+                params,
+                HttpMethod.GET,
+                new Request.Callback() {
+                    @Override
+                    public void onCompleted(Response response) {
+                        Log.wtf("wtf", response.getGraphObject().getProperty("cover").toString());
+                        GraphObject graphObject = response.getGraphObject();
+//                        String s = textViewResults.getText().toString();
+                        if (graphObject != null) {
+                            JSONObject jsonObject = graphObject.getInnerJSONObject();
+                            try {
+                                JSONArray array = jsonObject.getJSONArray("cover");
+                                for (int i = 0; i < array.length(); i++) {
+                                    JSONObject object = (JSONObject) array.get(i);
+                                    Log.wtf("id", "id = " + object.get("id"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+//                        textViewResults.setText(s);
+//                    }
+                    }
+                }).executeAsync();
 
         // set listener
         this.setAccountListener(this);
