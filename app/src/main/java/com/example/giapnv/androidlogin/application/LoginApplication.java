@@ -1,9 +1,10 @@
-package com.example.giapnv.androidlogin;
+package com.example.giapnv.androidlogin.application;
 
 import android.app.Application;
 import android.os.Debug;
 import android.util.Log;
 
+import com.example.giapnv.androidlogin.R;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseFacebookUtils;

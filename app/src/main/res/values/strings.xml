@@ -11,17 +11,7 @@
 
     <string name="profile_title_logged_in">Your are logged in as</string>
     <string name="profile_logout_button_label">Log out</string>
-    
-    <string name="intro_message">
-        <![CDATA[
 
-
-                This sample demonstrates how to create custom checkable layouts, for use with ListView\'s choiceMode
-                attribute.
-
-
-        ]]>
-    </string>
     <string name="submit_label">Submit</string>
 
 </resources>

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.giapnv.androidlogin;
+package com.example.giapnv.androidlogin.data;
 
 /**
  * Dummy data.

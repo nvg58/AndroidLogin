@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.giapnv.androidlogin.R;
-import com.example.giapnv.androidlogin.Reasons;
+import com.example.giapnv.androidlogin.data.Reasons;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -55,7 +54,7 @@ public class FragmentListReasons extends ListFragment {
     //
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.the_layout, container, false);
+        View view = inflater.inflate(R.layout.list_layout, container, false);
         view.findViewById(R.id.footer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -3,12 +3,8 @@
     <!-- Activity themes -->
 
     <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <!--<item name="actionBarStyle">@style/MyActionBarStyle</item>-->
-
-        <!-- Set AppCompat’s color theming attrs -->
         <item name="colorPrimary">@color/my_color</item>
         <item name="colorPrimaryDark">@color/my_darker_color</item>
-        <!--<item name="colorAccent">@color/my_accent</item>-->
         <item name="android:textColor">@android:color/black</item>
     </style>
 
@@ -38,8 +34,6 @@
 
     <style name="LoginTheme" parent="Theme.AppCompat">
         <item name="colorPrimaryDark">#424242</item>
-        <!--<item name="android:navigationBarColor">#424242</item>-->
-        <!--<item name="android:background">#F44336</item>-->
 
     </style>
 
@@ -52,6 +46,5 @@
 
     <color name="my_color">#424242</color>
     <color name="my_darker_color">#616161</color>
-    <!--<color name="my_accent">#29B6F6</color>-->
 
 </resources>

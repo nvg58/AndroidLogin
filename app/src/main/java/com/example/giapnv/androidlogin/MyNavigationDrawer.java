@@ -35,10 +35,7 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer implements Mate
         this.setAccountListener(this);
 
         // create sections
-        this.addSection(newSection("Section 1", new FragmentListReasons()));
-        this.addSection(newSection("Section 2", new Intent(this, ProfileActivity.class)));
-        this.addSection(newSection("Section 3", R.drawable.ic_mic_white_24dp, new FragmentListReasons()).setSectionColor(Color.parseColor("#9c27b0")));
-        this.addSection(newSection("Section", R.drawable.ic_hotel_grey600_24dp, new FragmentListReasons()).setSectionColor(Color.parseColor("#03a9f4")));
+        this.addSection(newSection("Choose reasons", R.drawable.ic_hotel_grey600_24dp, new FragmentListReasons()).setSectionColor(Color.parseColor("#9c27b0")));
 
         // create bottom section
         this.addBottomSection(newSection("Logout", R.drawable.ic_settings_black_24dp, new MaterialSectionListener() {
