@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="LoginTheme" parent="Theme.AppCompat">
+        <item name="colorPrimaryDark">#424242</item>
+        <item name="android:navigationBarColor">#424242</item>
+        <!--<item name="android:background">#F44336</item>-->
+
+    </style>
+</resources>

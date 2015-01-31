@@ -21,10 +21,8 @@ package com.example.giapnv.androidlogin;
  */
 public class Reasons {
     public static final String[] REASONS = {
-            "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam Abondance Ackawi",
-            "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam Abondance Ackawi",
-            "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam Abondance Ackawi",
-            "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam Abondance Ackawi",
-            "Acorn Adelost", "Affidelice au Chablis", "Other"
+            "Android", "iPhone", "WindowsMobile",
+            "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
+            "Linux", "OS/2", "Centos", "Windows Phone", "Firefox OS"
     };
 }

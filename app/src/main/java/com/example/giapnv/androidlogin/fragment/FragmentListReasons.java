@@ -10,13 +10,9 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.CheckedTextView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.giapnv.androidlogin.R;
@@ -26,47 +22,46 @@ import com.parse.ParseUser;
 
 import java.util.ArrayList;
 
-public class FragmentList extends ListFragment {
+public class FragmentListReasons extends ListFragment {
 
     ArrayList<String> reasonList = new ArrayList<>();
     ArrayAdapter<String> mAdapter;
-    private int index = -1;
-    private int top = 0;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 //        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        mAdapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_single_choice, Reasons.REASONS);
+        mAdapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_selectable_list_item, Reasons.REASONS);
         setListAdapter(mAdapter);
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Log.i("FragmentList", "Item clicked: " + id + position);
+        Log.i("FragmentListReasons", "Item clicked: " + id + Reasons.REASONS[(int) id]);
 
         CheckedTextView check = (CheckedTextView) v;
         check.toggle();
 
         if (check.isChecked()) {
             check.setTextColor(Color.parseColor("#9c27b0"));
-//            reasonList.add(Reasons.REASONS[(int)id]);
+            reasonList.add(Reasons.REASONS[(int) id]);
         } else {
             check.setTextColor(Color.parseColor("#111111"));
-//            reasonList.remove((int)id);
+            reasonList.remove(Reasons.REASONS[(int) id]);
         }
     }
 
+    //
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.the_layout, container, false);
         view.findViewById(R.id.footer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("getListView count", "" + getListView().getCheckedItemCount());
+                Log.d("reasonList", reasonList.toString());
                 if (reasonList.size() > 0) {
-                    new DownloadFilesTask().execute();
+                    new SubmitTask().execute();
                 } else {
                     Toast.makeText(getActivity().getApplicationContext(), "Please choose a reason!", Toast.LENGTH_SHORT).show();
                 }
@@ -74,30 +69,20 @@ public class FragmentList extends ListFragment {
         });
 
         return view;
+
+//        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        setListAdapter(mAdapter);
-        if (index != -1) {
-            this.getListView().setSelectionFromTop(index, top);
-        }
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//
+//        this.getListView().setAdapter(new ArrayAdapter<>(this.getActivity(),
+//                android.R.layout.simple_selectable_list_item,
+//                Reasons.REASONS));
+//    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        try {
-            index = this.getListView().getFirstVisiblePosition();
-            View v = this.getListView().getChildAt(0);
-            top = (v == null) ? 0 : v.getTop();
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
-    }
-
-    private class DownloadFilesTask extends AsyncTask<Void, Void, Void> {
+    private class SubmitTask extends AsyncTask<Void, Void, Void> {
         private ProgressDialog dialog = new ProgressDialog(getActivity());
 
         @Override
@@ -112,15 +97,7 @@ public class FragmentList extends ListFragment {
 
             ParseObject post = new ParseObject("AbsentReports");
 
-            String res = "";
-
-            int len = getListView().getCount();
-            SparseBooleanArray checked = getListView().getCheckedItemPositions();
-
-            for (int i = 0; i < len; i++)
-                if (checked.get(i)) {
-                    res += "[" + Reasons.REASONS[i] + "]";
-                }
+            String res = reasonList.toString();
 
             Log.d("%s", res);
 

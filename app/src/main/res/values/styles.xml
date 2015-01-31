@@ -38,7 +38,7 @@
 
     <style name="LoginTheme" parent="Theme.AppCompat">
         <item name="colorPrimaryDark">#424242</item>
-        <item name="android:navigationBarColor">#424242</item>
+        <!--<item name="android:navigationBarColor">#424242</item>-->
         <!--<item name="android:background">#F44336</item>-->
 
     </style>
@@ -53,4 +53,5 @@
     <color name="my_color">#424242</color>
     <color name="my_darker_color">#616161</color>
     <!--<color name="my_accent">#29B6F6</color>-->
+
 </resources>

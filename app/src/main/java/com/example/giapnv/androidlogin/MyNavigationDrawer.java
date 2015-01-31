@@ -5,8 +5,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
-import com.example.giapnv.androidlogin.fragment.FragmentList;
-import com.example.giapnv.androidlogin.fragment.FragmentIndex;
+import com.example.giapnv.androidlogin.fragment.FragmentListReasons;
 import com.parse.ParseUser;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
@@ -16,22 +15,30 @@ import it.neokree.materialnavigationdrawer.elements.listeners.MaterialAccountLis
 import it.neokree.materialnavigationdrawer.elements.listeners.MaterialSectionListener;
 
 public class MyNavigationDrawer extends MaterialNavigationDrawer implements MaterialAccountListener {
+    MaterialAccount account;
 
     @Override
     public void init(Bundle savedInstanceState) {
+        ParseUser user = ParseUser.getCurrentUser();
+
+//        if (ParseFacebookUtils.isLinked(user)) {
+        String userName = user.get("name").toString();
+        String userMail = user.getEmail();
+//            String userAvatar = ParseFacebookUtils.isLinked(user) ?
 
         // add accounts
-        MaterialAccount account = new MaterialAccount(this.getResources(), "NeoKree", "neokree@gmail.com", R.drawable.photo, R.drawable.bamboo);
+        account = new MaterialAccount(this.getResources(), userName, userMail, R.drawable.photo, R.drawable.bamboo);
         this.addAccount(account);
+//        }
 
         // set listener
         this.setAccountListener(this);
 
         // create sections
-        this.addSection(newSection("Section 1", new FragmentIndex()));
+        this.addSection(newSection("Section 1", new FragmentListReasons()));
         this.addSection(newSection("Section 2", new Intent(this, ProfileActivity.class)));
-        this.addSection(newSection("Section 3", R.drawable.ic_mic_white_24dp, new FragmentList()).setSectionColor(Color.parseColor("#9c27b0")));
-        this.addSection(newSection("Section", R.drawable.ic_hotel_grey600_24dp, new FragmentList()).setSectionColor(Color.parseColor("#03a9f4")));
+        this.addSection(newSection("Section 3", R.drawable.ic_mic_white_24dp, new FragmentListReasons()).setSectionColor(Color.parseColor("#9c27b0")));
+        this.addSection(newSection("Section", R.drawable.ic_hotel_grey600_24dp, new FragmentListReasons()).setSectionColor(Color.parseColor("#03a9f4")));
 
         // create bottom section
         this.addBottomSection(newSection("Logout", R.drawable.ic_settings_black_24dp, new MaterialSectionListener() {
@@ -63,4 +70,6 @@ public class MyNavigationDrawer extends MaterialNavigationDrawer implements Mate
     public void onChangeAccount(MaterialAccount newAccount) {
 
     }
+
+
 }
